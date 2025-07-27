@@ -12,7 +12,7 @@
       margin: 0;
       font-family: 'Pacifico', cursive;
       color: white;
-      overflow: hidden;
+      overflow-x: hidden;
       background:
         linear-gradient(120deg, rgba(20, 0, 30, 0.8), rgba(40, 0, 50, 0.8), rgba(60, 0, 60, 0.8)),
         url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
@@ -23,9 +23,10 @@
       position: relative;
       z-index: 2;
       text-align: center;
-      top: 30%;
-      max-width: 320px;
-      margin: 0 auto;
+      top: 25%;
+      max-width: 700px;
+      margin: 30px auto 0 auto;
+      padding: 0 20px;
     }
 
     h1 {
@@ -141,36 +142,116 @@
       z-index: 1;
     }
 
-    /* Media query para celulares */
+    /* Carta (envelope) fechada */
+    .carta {
+      max-width: 600px;
+      margin: 40px auto 0 auto;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+      color: #ffe6f0;
+      cursor: pointer;
+      perspective: 1000px;
+      position: relative;
+      user-select: none;
+      height: 200px;
+      overflow: hidden;
+      transition: height 0.8s ease;
+    }
+
+    /* Parte interna da carta (texto escondido) */
+    .carta-inner {
+      width: 100%;
+      height: 100%;
+      background: rgba(40, 0, 50, 0.9);
+      border-radius: 15px;
+      padding: 25px 30px;
+      box-sizing: border-box;
+      font-size: 1.4rem;
+      line-height: 1.6;
+      color: #ffe6f0;
+      text-shadow: 0 0 8px #ff79c6;
+      overflow-y: auto;
+
+      transform-style: preserve-3d;
+      transform-origin: top center;
+      transition: transform 0.8s ease;
+      transform: rotateX(90deg);
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Carta aberta */
+    .carta.aberta {
+      height: 400px;
+      cursor: default;
+    }
+    .carta.aberta .carta-inner {
+      transform: rotateX(0deg);
+      opacity: 1;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    /* Indicador para o usuário: “Clique para abrir” */
+    .carta::before {
+      content: "Clique para abrir a carta";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      color: #ff79c6;
+      text-shadow: 0 0 5px #ff79c6;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .carta.aberta::before {
+      opacity: 0;
+    }
+
+    /* Scrollbar estilizada */
+    .carta-inner::-webkit-scrollbar {
+      width: 8px;
+    }
+    .carta-inner::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    .carta-inner::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 10px;
+    }
+
+    /* Responsivo */
     @media (max-width: 600px) {
-      body {
-        overflow-y: auto;
-      }
-      .container {
-        top: auto;
-        margin: 40px auto;
-        max-width: 90vw;
-        width: 280px;
-      }
-
       h1 {
-        font-size: 2.2rem;
-        margin-bottom: 8px;
+        font-size: 2.5rem;
       }
-
       p {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
-
       .foto-container {
-        width: 280px;
-        height: 350px;
+        width: 140px;
+        height: 175px;
       }
-
       .foto-container img {
-        width: 280px;
-        height: 350px;
-        border-width: 5px;
+        width: 140px;
+        height: 175px;
+      }
+      .carta {
+        max-width: 90vw;
+        height: 150px;
+      }
+      .carta.aberta {
+        height: 300px;
+      }
+      .carta-inner {
+        font-size: 1rem;
+        padding: 15px 20px;
       }
     }
   </style>
@@ -178,7 +259,7 @@
 <body>
   <div id="particles-js"></div>
   <div class="container">
-    <h1>quanto tempo estamos juntos?</h1>
+    <h1>Construindo uma vida com você há:</h1>
     <p id="timer"></p>
     <div class="foto-container">
       <img src="foto.jpg" alt="Foto do casal" class="active" />
@@ -187,6 +268,22 @@
       <img src="foto3.jpg" alt="Foto do casal" />
     </div>
     <p>Te amo minha gata❤️</p>
+
+    <div class="carta" id="carta">
+      <div class="carta-inner">
+        Depois de ter sofrido por alguém que não me amava, fiquei sem ânimo para conhecer alguém novo e me apaixonar de novo.<br><br>
+        Mas foi aí que você apareceu.<br><br>
+        Nunca imaginei que estaria conhecendo uma pessoa tão boa de estar por perto: linda, inteligente e cheia de qualidades.<br><br>
+        Não sei o que você viu em mim. Como eu disse, “nunca eu imaginaria”, mas aconteceu — me apaixonei.<br><br>
+        E que bom que foi assim.<br><br>
+        Eu tinha pensamentos tão negativos sobre mim, e você me livra deles. Sua simples presença ao meu lado já é suficiente para que eu possa dormir e não ter pesadelos.<br><br>
+        Tivemos nossos momentos difíceis, conversas emocionantes, mas nada que pudesse acabar com o nosso relacionamento.<br><br>
+        E espero que seja sempre assim.<br><br>
+        Quero continuar sempre ao seu lado, até nos dias mais difíceis.<br><br>
+        Eu te amo e quero registrar ainda mais momentos com você — até porque, tenho mais fotos separados do que juntos.
+      </div>
+    </div>
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
@@ -246,7 +343,6 @@
     }
     setInterval(updateTimer, 1000);
 
-    // Efeito de folheamento horizontal com 3D
     const fotos = document.querySelectorAll(".foto-container img");
     let index = 0;
 
@@ -255,15 +351,12 @@
       index = (index + 1) % fotos.length;
       const proximaFoto = fotos[index];
 
-      // Sai para direita e rotaciona
       fotoAtual.classList.add("slide-out");
       fotoAtual.classList.remove("active");
 
-      // Entra da esquerda com rotação
       proximaFoto.classList.add("slide-in");
       proximaFoto.classList.add("active");
 
-      // Limpar classes depois da animação
       fotoAtual.addEventListener(
         "animationend",
         () => {
@@ -283,6 +376,12 @@
     }
 
     setInterval(trocarFoto, 5000);
+
+    // Abrir/fechar carta ao clicar/tocar
+    const carta = document.getElementById("carta");
+    carta.addEventListener("click", () => {
+      carta.classList.toggle("aberta");
+    });
   </script>
 </body>
 </html>

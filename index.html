@@ -287,102 +287,101 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-<script>
-  particlesJS("particles-js", {
-    particles: {
-      number: { value: 50 },
-      size: { value: 3 },
-      color: { value: "#ffffff" },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: "#ffffff",
-        opacity: 0.2,
-        width: 1,
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 50 },
+        size: { value: 3 },
+        color: { value: "#ffffff" },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.2,
+          width: 1,
+        },
+        move: {
+          enable: true,
+          speed: 1,
+        },
       },
-      move: {
-        enable: true,
-        speed: 1,
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+        },
       },
-    },
-    interactivity: {
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-      },
-    },
-  });
+    });
 
-  function createHearts() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }
-  setInterval(createHearts, 300);
+    function createHearts() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHearts, 300);
 
-  // Correção do fuso horário
-  const startDate = new Date(Date.UTC(2025, 5, 27, 0, 0, 0)); // 27 de Maio (mês 4 = Maio)
-  function updateTimer() {
-    const now = new Date();
-    let diff = Math.floor((now.getTime() - startDate.getTime()) / 1000);
+    const startDate = new Date("2025-05-27T00:00:00");
+    function updateTimer() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000);
 
-    const years = Math.floor(diff / (365 * 24 * 3600));
-    diff %= 365 * 24 * 3600;
-    const months = Math.floor(diff / (30 * 24 * 3600));
-    diff %= 30 * 24 * 3600;
-    const days = Math.floor(diff / (24 * 3600));
-    diff %= 24 * 3600;
-    const hours = Math.floor(diff / 3600);
-    diff %= 3600;
-    const minutes = Math.floor(diff / 60);
-    const seconds = diff % 60;
+      const years = Math.floor(diff / (365 * 24 * 3600));
+      diff %= 365 * 24 * 3600;
+      const months = Math.floor(diff / (30 * 24 * 3600));
+      diff %= 30 * 24 * 3600;
+      const days = Math.floor(diff / (24 * 3600));
+      diff %= 24 * 3600;
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
 
-    document.getElementById("timer").textContent =
-      `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s`;
-  }
-  setInterval(updateTimer, 1000);
+      document.getElementById("timer").textContent =
+        ${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s;
+    }
+    setInterval(updateTimer, 1000);
 
-  const fotos = document.querySelectorAll(".foto-container img");
-  let index = 0;
+    const fotos = document.querySelectorAll(".foto-container img");
+    let index = 0;
 
-  function trocarFoto() {
-    const fotoAtual = fotos[index];
-    index = (index + 1) % fotos.length;
-    const proximaFoto = fotos[index];
+    function trocarFoto() {
+      const fotoAtual = fotos[index];
+      index = (index + 1) % fotos.length;
+      const proximaFoto = fotos[index];
 
-    fotoAtual.classList.add("slide-out");
-    fotoAtual.classList.remove("active");
+      fotoAtual.classList.add("slide-out");
+      fotoAtual.classList.remove("active");
 
-    proximaFoto.classList.add("slide-in");
-    proximaFoto.classList.add("active");
+      proximaFoto.classList.add("slide-in");
+      proximaFoto.classList.add("active");
 
-    fotoAtual.addEventListener(
-      "animationend",
-      () => {
-        fotoAtual.classList.remove("slide-out");
-        fotoAtual.style.transform = "";
-      },
-      { once: true }
-    );
-    proximaFoto.addEventListener(
-      "animationend",
-      () => {
-        proximaFoto.classList.remove("slide-in");
-        proximaFoto.style.transform = "";
-      },
-      { once: true }
-    );
-  }
+      fotoAtual.addEventListener(
+        "animationend",
+        () => {
+          fotoAtual.classList.remove("slide-out");
+          fotoAtual.style.transform = "";
+        },
+        { once: true }
+      );
+      proximaFoto.addEventListener(
+        "animationend",
+        () => {
+          proximaFoto.classList.remove("slide-in");
+          proximaFoto.style.transform = "";
+        },
+        { once: true }
+      );
+    }
 
-  setInterval(trocarFoto, 5000);
+    setInterval(trocarFoto, 5000);
 
-  // Abrir/fechar carta ao clicar/tocar
-  const carta = document.getElementById("carta");
-  carta.addEventListener("click", () => {
-    carta.classList.toggle("aberta");
-  });
-</script>
+    // Abrir/fechar carta ao clicar/tocar
+    const carta = document.getElementById("carta");
+    carta.addEventListener("click", () => {
+      carta.classList.toggle("aberta");
+    });
+  </script>
 </body>
 </html>

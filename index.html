@@ -7,10 +7,253 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-  <!-- ... (CSS permanece igual, sem alteração) ... -->
   <style>
-    /* Seu CSS original permanece inalterado */
-    /* ... omitido aqui por brevidade ... */
+    body {
+      margin: 0;
+      font-family: 'Pacifico', cursive;
+      color: white;
+      overflow-x: hidden;
+      background:
+        linear-gradient(120deg, rgba(20, 0, 30, 0.8), rgba(40, 0, 50, 0.8), rgba(60, 0, 60, 0.8)),
+        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      top: 25%;
+      max-width: 700px;
+      margin: 30px auto 0 auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 4rem;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 2rem;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
+    }
+
+    .foto-container {
+      position: relative;
+      width: 200px;
+      height: 250px;
+      margin: 20px auto;
+      perspective: 1000px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .foto-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 250px;
+      border-radius: 0;
+      border: 4px solid white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 0.5s ease;
+      backface-visibility: hidden;
+    }
+
+    .foto-container img.active {
+      opacity: 1;
+      position: relative;
+      z-index: 3;
+      top: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .foto-container img.slide-out {
+      animation: slideOut 0.8s forwards;
+      z-index: 2;
+    }
+
+    .foto-container img.slide-in {
+      animation: slideIn 0.8s forwards;
+      z-index: 3;
+    }
+
+    @keyframes slideOut {
+      0% {
+        transform: translateX(0) rotateY(0deg);
+        opacity: 1;
+        z-index: 2;
+      }
+      100% {
+        transform: translateX(300px) rotateY(90deg);
+        opacity: 0;
+        z-index: 1;
+      }
+    }
+
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-300px) rotateY(-90deg);
+        opacity: 0;
+        z-index: 1;
+      }
+      100% {
+        transform: translateX(0) rotateY(0deg);
+        opacity: 1;
+        z-index: 3;
+      }
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Ei-heart.svg/1024px-Ei-heart.svg.png') no-repeat center;
+      background-size: contain;
+      top: -20px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    /* Carta (envelope) fechada */
+    .carta {
+      max-width: 600px;
+      margin: 40px auto 0 auto;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+      color: #ffe6f0;
+      cursor: pointer;
+      perspective: 1000px;
+      position: relative;
+      user-select: none;
+      height: 200px;
+      overflow: hidden;
+      transition: height 0.8s ease;
+    }
+
+    /* Parte interna da carta (texto escondido) */
+    .carta-inner {
+      width: 100%;
+      height: 100%;
+      background: rgba(40, 0, 50, 0.9);
+      border-radius: 15px;
+      padding: 25px 30px;
+      box-sizing: border-box;
+      font-size: 1.4rem;
+      line-height: 1.6;
+      color: #ffe6f0;
+      text-shadow: 0 0 8px #ff79c6;
+      overflow-y: auto;
+
+      transform-style: preserve-3d;
+      transform-origin: top center;
+      transition: transform 0.8s ease;
+      transform: rotateX(90deg);
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* Carta aberta */
+    .carta.aberta {
+      height: 400px;
+      cursor: default;
+    }
+    .carta.aberta .carta-inner {
+      transform: rotateX(0deg);
+      opacity: 1;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    /* Indicador para o usuário: “Clique para abrir” */
+    .carta::before {
+      content: "Clique para abrir a carta";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      color: #ff79c6;
+      text-shadow: 0 0 5px #ff79c6;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .carta.aberta::before {
+      opacity: 0;
+    }
+
+    /* Scrollbar estilizada */
+    .carta-inner::-webkit-scrollbar {
+      width: 8px;
+    }
+    .carta-inner::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+    }
+    .carta-inner::-webkit-scrollbar-thumb {
+      background: #ff79c6;
+      border-radius: 10px;
+    }
+
+    /* Responsivo */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.3rem;
+      }
+      .foto-container {
+        width: 140px;
+        height: 175px;
+      }
+      .foto-container img {
+        width: 140px;
+        height: 175px;
+      }
+      .carta {
+        max-width: 90vw;
+        height: 150px;
+      }
+      .carta.aberta {
+        height: 300px;
+      }
+      .carta-inner {
+        font-size: 1rem;
+        padding: 15px 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -37,9 +280,10 @@
         Tivemos nossos momentos difíceis, conversas emocionantes, mas nada que pudesse acabar com o nosso relacionamento.<br><br>
         E espero que seja sempre assim.<br><br>
         Quero continuar sempre ao seu lado, até nos dias mais difíceis.<br><br>
-        Eu te amo e quero registrar ainda mais momentos com você — até porque, tenho mais fotos separados do que juntos.
+        Eu te amo e quero registrar ainda mais momentos com você — mesmo que eu tenha mais fotos sozinho do que juntos.
       </div>
     </div>
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
@@ -78,9 +322,9 @@
     }
     setInterval(createHearts, 300);
 
-    const startDate = new Date('2025-05-27T00:00:00-03:00');
+    const startDate = new Date("2025-05-27T00:00:00");
     function updateTimer() {
-      const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+      const now = new Date();
       let diff = Math.floor((now - startDate) / 1000);
 
       const years = Math.floor(diff / (365 * 24 * 3600));
@@ -98,7 +342,6 @@
         `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s`;
     }
     setInterval(updateTimer, 1000);
-    updateTimer();
 
     const fotos = document.querySelectorAll(".foto-container img");
     let index = 0;

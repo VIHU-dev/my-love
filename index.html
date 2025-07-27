@@ -27,40 +27,66 @@
     }
 
     h1 {
-      font-size: 4rem;
-      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
+      font-size: 4rem; /* aumenta o tamanho */
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
       margin-bottom: 10px;
     }
 
     p {
-      font-size: 2rem;
-      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
+      font-size: 2rem; /* aumenta o tamanho */
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
     }
 
-    /* Container das fotos empilhadas */
+    /* Container para as fotos para controlar o empilhamento */
     .foto-container {
       position: relative;
       width: 200px;
-      height: auto;
+      height: 250px; /* altura fixa pra animação */
       margin: 20px auto 0;
+      overflow: visible;
     }
 
+    /* Fotos empilhadas */
     .foto-container img {
       position: absolute;
       top: 0;
       left: 0;
       width: 200px;
-      border-radius: 0;
+      height: 250px;
+      border-radius: 0; /* borda retangular */
       border: 4px solid white;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      z-index: 1;
+      transition: opacity 0.5s ease;
     }
 
+    /* Foto que está aparecendo */
     .foto-container img.active {
       opacity: 1;
       position: relative;
+      z-index: 3;
+      top: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    /* Foto que está saindo, anima para baixo */
+    .foto-container img.slide-down {
+      animation: slideDown 0.8s forwards;
       z-index: 2;
+    }
+
+    @keyframes slideDown {
+      0% {
+        top: 0;
+        opacity: 1;
+        z-index: 2;
+      }
+      100% {
+        top: 260px; /* desliza para baixo */
+        opacity: 0;
+        z-index: 1;
+      }
     }
 
     .heart {
@@ -99,15 +125,12 @@
   <div class="container">
     <h1>Construindo uma vida com você há:</h1>
     <p id="timer"></p>
-
-    <!-- Substitui a tag img por este container -->
     <div class="foto-container">
-      <img src="foto.jpg" alt="Foto do casal" class="active" />
-      <img src="foto1.jpg" alt="Foto do casal" />
+      <img src="foto1.jpg" alt="Foto do casal" class="active" />
       <img src="foto2.jpg" alt="Foto do casal" />
       <img src="foto3.jpg" alt="Foto do casal" />
+      <img src="foto4.jpg" alt="Foto do casal" />
     </div>
-
     <p>Te amo minha gata❤️</p>
   </div>
 
@@ -168,15 +191,30 @@
     }
     setInterval(updateTimer, 1000);
 
-    // Slideshow fotos empilhadas
+    // Efeito folheamento fotos
     const fotos = document.querySelectorAll(".foto-container img");
     let index = 0;
+
     function trocarFoto() {
-      fotos[index].classList.remove("active");
+      const fotoAtual = fotos[index];
+      fotoAtual.classList.add("slide-down");
+      fotoAtual.classList.remove("active");
+
       index = (index + 1) % fotos.length;
-      fotos[index].classList.add("active");
+      const proximaFoto = fotos[index];
+      proximaFoto.classList.add("active");
+
+      fotoAtual.addEventListener(
+        "animationend",
+        () => {
+          fotoAtual.classList.remove("slide-down");
+          fotoAtual.style.top = "0px"; // resetar posição
+        },
+        { once: true }
+      );
     }
-    setInterval(trocarFoto, 5000);
+
+    setInterval(trocarFoto, 5000); // troca a foto a cada 5 segundos
   </script>
 </body>
 </html>

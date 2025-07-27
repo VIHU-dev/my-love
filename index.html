@@ -27,33 +27,31 @@
     }
 
     h1 {
-      font-size: 4rem; /* aumenta o tamanho */
-      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
+      font-size: 4rem;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
       margin-bottom: 10px;
     }
 
     p {
-      font-size: 2rem; /* aumenta o tamanho */
-      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
+      font-size: 2rem;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
     }
 
-    /* Container para as fotos para controlar o empilhamento */
     .foto-container {
       position: relative;
       width: 200px;
-      height: 250px; /* altura fixa pra animação */
+      height: 250px;
       margin: 20px auto 0;
-      overflow: visible;
+      overflow: hidden;
     }
 
-    /* Fotos empilhadas */
     .foto-container img {
       position: absolute;
       top: 0;
       left: 0;
       width: 200px;
       height: 250px;
-      border-radius: 0; /* borda retangular */
+      border-radius: 0;
       border: 4px solid white;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
       opacity: 0;
@@ -61,7 +59,6 @@
       transition: opacity 0.5s ease;
     }
 
-    /* Foto que está aparecendo */
     .foto-container img.active {
       opacity: 1;
       position: relative;
@@ -70,7 +67,6 @@
       transition: opacity 0.5s ease;
     }
 
-    /* Foto que está saindo, anima para baixo */
     .foto-container img.slide-down {
       animation: slideDown 0.8s forwards;
       z-index: 2;
@@ -83,7 +79,7 @@
         z-index: 2;
       }
       100% {
-        top: 260px; /* desliza para baixo */
+        top: 260px;
         opacity: 0;
         z-index: 1;
       }
@@ -191,7 +187,7 @@
     }
     setInterval(updateTimer, 1000);
 
-    // Efeito folheamento fotos
+    // Efeito de folheamento lateral: imagem sai pra baixo e próxima entra por cima
     const fotos = document.querySelectorAll(".foto-container img");
     let index = 0;
 
@@ -208,13 +204,13 @@
         "animationend",
         () => {
           fotoAtual.classList.remove("slide-down");
-          fotoAtual.style.top = "0px"; // resetar posição
+          fotoAtual.style.top = "0px"; // resetar
         },
         { once: true }
       );
     }
 
-    setInterval(trocarFoto, 5000); // troca a foto a cada 5 segundos
+    setInterval(trocarFoto, 5000); // a cada 5 segundos
   </script>
 </body>
 </html>

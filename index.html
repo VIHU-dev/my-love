@@ -280,7 +280,7 @@
         Tivemos nossos momentos difíceis, conversas emocionantes, mas nada que pudesse acabar com o nosso relacionamento.<br><br>
         E espero que seja sempre assim.<br><br>
         Quero continuar sempre ao seu lado, até nos dias mais difíceis.<br><br>
-        Eu te amo e quero registrar ainda mais momentos com você — até porque, tenho mais fotos separados do que juntos.
+        Eu te amo e quero registrar ainda mais momentos com você — mesmo que eu tenha mais fotos sozinho do que juntos.
       </div>
     </div>
 
@@ -322,7 +322,7 @@
     }
     setInterval(createHearts, 300);
 
-   const startDate = new Date('2025-05-27T00:00:00-03:00');
+    const startDate = new Date("2025-05-27T00:00:00");
     function updateTimer() {
       const now = new Date();
       let diff = Math.floor((now - startDate) / 1000);
@@ -339,7 +339,7 @@
       const seconds = diff % 60;
 
       document.getElementById("timer").textContent =
-        ${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s;
+        `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s`;
     }
     setInterval(updateTimer, 1000);
 

@@ -27,22 +27,40 @@
     }
 
     h1 {
-      font-size: 4rem; /* aumenta o tamanho */
-      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
+      font-size: 4rem;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
       margin-bottom: 10px;
     }
 
     p {
-      font-size: 2rem; /* aumenta o tamanho */
-      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
+      font-size: 2rem;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
     }
 
-    img {
+    /* Container das fotos empilhadas */
+    .foto-container {
+      position: relative;
       width: 200px;
-      border-radius: 0; /* borda retangular */
-      margin-top: 20px;
+      height: auto;
+      margin: 20px auto 0;
+    }
+
+    .foto-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      border-radius: 0;
       border: 4px solid white;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .foto-container img.active {
+      opacity: 1;
+      position: relative;
+      z-index: 2;
     }
 
     .heart {
@@ -81,7 +99,15 @@
   <div class="container">
     <h1>Construindo uma vida com você há:</h1>
     <p id="timer"></p>
-    <img id="foto" src="foto1.jpg" alt="Foto do casal" />
+
+    <!-- Substitui a tag img por este container -->
+    <div class="foto-container">
+      <img src="foto.jpg" alt="Foto do casal" class="active" />
+      <img src="foto1.jpg" alt="Foto do casal" />
+      <img src="foto2.jpg" alt="Foto do casal" />
+      <img src="foto3.jpg" alt="Foto do casal" />
+    </div>
+
     <p>Te amo minha gata❤️</p>
   </div>
 
@@ -142,17 +168,15 @@
     }
     setInterval(updateTimer, 1000);
 
-    // Slideshow de fotos automático
-    const fotos = ["foto.jpg", "foto1.jpg", "foto2.jpg", "foto3.jpg"]; // coloque os nomes/caminhos das suas fotos aqui
+    // Slideshow fotos empilhadas
+    const fotos = document.querySelectorAll(".foto-container img");
     let index = 0;
-    const imgElement = document.getElementById("foto");
-
     function trocarFoto() {
+      fotos[index].classList.remove("active");
       index = (index + 1) % fotos.length;
-      imgElement.src = fotos[index];
+      fotos[index].classList.add("active");
     }
-
-    setInterval(trocarFoto, 5000); // troca a foto a cada 5 segundos
+    setInterval(trocarFoto, 5000);
   </script>
 </body>
 </html>

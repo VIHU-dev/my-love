@@ -8,7 +8,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #2c003e, #5a2a27);
+      background: linear-gradient(120deg, #1a001a 0%, #3d003d 50%, #5a2a27 100%);
       overflow: hidden;
       color: #f0e6f6;
       text-align: center;
@@ -65,7 +65,6 @@
   <div id="tempo"></div>
 
   <script>
-    // Ajuste a data aqui: ano, mês (0=jan), dia, hora, minuto, segundo
     const dataInicio = new Date(2023, 6, 10, 20, 30, 0);
 
     function atualizarTempo() {
@@ -96,7 +95,6 @@
     setInterval(atualizarTempo, 1000);
     atualizarTempo();
 
-    // Criar corações caindo
     function criarCoracao() {
       const heart = document.createElement('div');
       heart.classList.add('heart');

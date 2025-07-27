@@ -1,134 +1,177 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Love</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #1a001a, #3d003d, #5a2a27);
-      background-size: 600% 600%;
-      animation: gradientBG 15s ease infinite;
       font-family: 'Great Vibes', cursive;
-      overflow: hidden;
-      position: relative;
       color: white;
       text-align: center;
-    }
-
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
-    .container {
-      z-index: 2;
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 90%;
-    }
-
-    img {
-      width: 200px;
-      height: auto;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      border: 3px solid white;
+      background: linear-gradient(120deg, rgba(26,0,26,0.9), rgba(61,0,61,0.9), rgba(90,42,39,0.9)), url('https://i.ibb.co/y5JFKh0/fundo-romantico.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      margin-top: 20px;
+      font-size: 3em;
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
     }
 
-    p {
-      font-size: 1.5rem;
+    .photo {
+      width: 200px;
+      height: auto;
+      border: 4px solid white;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+      border-radius: 20px;
     }
 
-    .hearts {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
+    .contador {
+      font-size: 1.5em;
+      margin-top: 10px;
     }
 
     .heart {
       position: absolute;
-      color: pink;
-      font-size: 20px;
-      animation: floatHearts 10s linear infinite;
+      width: 20px;
+      height: 20px;
+      background: url('https://i.ibb.co/s1J4QKx/heart.png') no-repeat center;
+      background-size: contain;
+      animation: float 8s linear infinite;
+      opacity: 0.6;
     }
 
-    @keyframes floatHearts {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(0.5);
-        opacity: 0;
-      }
+    @keyframes float {
+      0% {transform: translateY(0) rotate(0deg); opacity: 1;}
+      100% {transform: translateY(-100vh) rotate(360deg); opacity: 0;}
     }
 
-    #time {
-      font-weight: bold;
-      font-size: 1.8rem;
-      margin-top: 15px;
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      top: 0;
+      left: 0;
     }
   </style>
 </head>
 <body>
-  <div class="hearts"></div>
+  <div id="particles-js"></div>
 
-  <div class="container">
-    <img src="foto.jpg" alt="Foto do casal">
-    <h1>Para o amor da minha vida</h1>
-    <p>Amo você há:</p>
-    <p id="time"></p>
-  </div>
+  <h1>Amo você há:</h1>
+  <img src="https://i.ibb.co/CwkBYTz/foto-namorada.jpg" alt="Foto" class="photo">
+  <div class="contador" id="contador"></div>
 
   <script>
-    const container = document.querySelector('.hearts');
-    for (let i = 0; i < 50; i++) {
+    const inicio = new Date('2024-05-27T00:00:00');
+    const contador = document.getElementById('contador');
+
+    function atualizarTempo() {
+      const agora = new Date();
+      let diff = agora - inicio;
+
+      let anos = agora.getFullYear() - inicio.getFullYear();
+      let meses = agora.getMonth() - inicio.getMonth();
+      if (meses < 0) {
+        anos--;
+        meses += 12;
+      }
+
+      let dias = agora.getDate() - inicio.getDate();
+      if (dias < 0) {
+        meses--;
+        let diasNoMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += diasNoMesAnterior;
+      }
+
+      let horas = agora.getHours();
+      let minutos = agora.getMinutes();
+      let segundos = agora.getSeconds();
+
+      contador.innerText = `${anos} anos, ${meses} meses, ${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+    }
+
+    setInterval(atualizarTempo, 1000);
+    atualizarTempo();
+
+    function criarCoracoes() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      heart.innerText = '❤️';
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-      heart.style.animationDuration = (Math.random() * 10 + 5) + 's';
-      container.appendChild(heart);
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000);
     }
 
-    function updateLoveTime() {
-      const startDate = new Date("2024-05-27T00:00:00");
-      const now = new Date();
-      const diff = now - startDate;
+    setInterval(criarCoracoes, 300);
+  </script>
 
-      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-      const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.4375)) % 12;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 30;
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("time").textContent = `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s`;
-    }
-
-    updateLoveTime();
-    setInterval(updateLoveTime, 1000);
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": { "value": "#ffffff" },
+        "shape": {
+          "type": "circle",
+          "stroke": { "width": 0, "color": "#000000" }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": { "enable": false }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": { "enable": false }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 3,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out"
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" }
+        },
+        "modes": {
+          "repulse": { "distance": 100, "duration": 0.4 },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
   </script>
 </body>
 </html>

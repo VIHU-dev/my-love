@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Meu Amor 💖</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    img {
+      max-width: 250px;
+      border-radius: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    h1 {
+      color: #d63384;
+    }
+    p {
+      font-size: 18px;
+    }
+    #tempo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #e83e8c;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Para Meu Amor 💖</h1>
+  <p>Desde que você chegou na minha vida, tudo ficou mais bonito.</p>
+  <img src="foto.jpg" alt="Foto da pessoa amada">
+  <div id="tempo"></div>
+
+  <script>
+    // Coloque aqui a data que vocês começaram a namorar (ano, mês - 1, dia, hora, minuto, segundo)
+    const dataInicio = new Date(2022, 4, 10, 18, 0, 0); // Exemplo: 10/05/2022 às 18:00
+
+    function atualizarTempo() {
+      const agora = new Date();
+      let diff = agora - dataInicio;
+
+      const anos = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      diff -= anos * (1000 * 60 * 60 * 24 * 365.25);
+
+      const meses = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
+      diff -= meses * (1000 * 60 * 60 * 24 * 30.44);
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= dias * (1000 * 60 * 60 * 24);
+
+      const horas = Math.floor(diff / (1000 * 60 * 60));
+      diff -= horas * (1000 * 60 * 60);
+
+      const minutos = Math.floor(diff / (1000 * 60));
+      diff -= minutos * (1000 * 60);
+
+      const segundos = Math.floor(diff / 1000);
+
+      document.getElementById("tempo").innerHTML =
+        `Amo você há: ${anos} anos / ${meses} meses / ${dias} dias / ${horas} horas / ${minutos} minutos / ${segundos} segundos`;
+    }
+
+    setInterval(atualizarTempo, 1000);
+    atualizarTempo();
+  </script>
+</body>
+</html>

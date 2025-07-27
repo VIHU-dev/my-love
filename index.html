@@ -24,6 +24,8 @@
       z-index: 2;
       text-align: center;
       top: 30%;
+      max-width: 320px;
+      margin: 0 auto;
     }
 
     h1 {
@@ -37,7 +39,6 @@
       text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6;
     }
 
-    /* Container ajustado para centralizar e manter 3D */
     .foto-container {
       position: relative;
       width: 200px;
@@ -48,7 +49,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: visible; /* permite fotos saírem do container */
+      overflow: visible;
     }
 
     .foto-container img {
@@ -63,7 +64,7 @@
       opacity: 0;
       z-index: 1;
       transition: opacity 0.5s ease;
-      backface-visibility: hidden; /* para efeito 3D */
+      backface-visibility: hidden;
     }
 
     .foto-container img.active {
@@ -138,6 +139,39 @@
       top: 0;
       left: 0;
       z-index: 1;
+    }
+
+    /* Media query para celulares */
+    @media (max-width: 600px) {
+      body {
+        overflow-y: auto;
+      }
+      .container {
+        top: auto;
+        margin: 40px auto;
+        max-width: 90vw;
+        width: 280px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      .foto-container {
+        width: 280px;
+        height: 350px;
+      }
+
+      .foto-container img {
+        width: 280px;
+        height: 350px;
+        border-width: 5px;
+      }
     }
   </style>
 </head>

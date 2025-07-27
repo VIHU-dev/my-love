@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Love</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
       font-family: 'Pacifico', cursive;
       color: white;
       overflow: hidden;
-      background: 
+      background:
         linear-gradient(120deg, rgba(20, 0, 30, 0.8), rgba(40, 0, 50, 0.8), rgba(60, 0, 60, 0.8)),
         url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
       background-size: cover;
@@ -26,26 +26,24 @@
       top: 30%;
     }
 
- h1 {
-  font-size: 4rem; /* aumenta o tamanho */
-  text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
-  margin-bottom: 10px;
-}
-
-p {
-  font-size: 2rem; /* aumenta o tamanho */
-  text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
-  
+    h1 {
+      font-size: 4rem; /* aumenta o tamanho */
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
+      margin-bottom: 10px;
     }
 
-   img {
-  width: 200px;
-  border-radius: 0; /* borda retangular */
-  margin-top: 20px;
-  border: 4px solid white;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-}
+    p {
+      font-size: 2rem; /* aumenta o tamanho */
+      text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; /* mantém a sombra rosa */
+    }
 
+    img {
+      width: 200px;
+      border-radius: 0; /* borda retangular */
+      margin-top: 20px;
+      border: 4px solid white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
 
     .heart {
       position: fixed;
@@ -83,7 +81,7 @@ p {
   <div class="container">
     <h1>Construindo uma vida com você há:</h1>
     <p id="timer"></p>
-    <img src="foto.jpg" alt="Foto do casal">
+    <img id="foto" src="foto1.jpg" alt="Foto do casal" />
     <p>Te amo minha gata❤️</p>
   </div>
 
@@ -99,18 +97,18 @@ p {
           distance: 150,
           color: "#ffffff",
           opacity: 0.2,
-          width: 1
+          width: 1,
         },
         move: {
           enable: true,
-          speed: 1
-        }
+          speed: 1,
+        },
       },
       interactivity: {
         events: {
-          onhover: { enable: true, mode: "repulse" }
-        }
-      }
+          onhover: { enable: true, mode: "repulse" },
+        },
+      },
     });
 
     function createHearts() {
@@ -129,11 +127,11 @@ p {
       let diff = Math.floor((now - startDate) / 1000);
 
       const years = Math.floor(diff / (365 * 24 * 3600));
-      diff %= (365 * 24 * 3600);
+      diff %= 365 * 24 * 3600;
       const months = Math.floor(diff / (30 * 24 * 3600));
-      diff %= (30 * 24 * 3600);
+      diff %= 30 * 24 * 3600;
       const days = Math.floor(diff / (24 * 3600));
-      diff %= (24 * 3600);
+      diff %= 24 * 3600;
       const hours = Math.floor(diff / 3600);
       diff %= 3600;
       const minutes = Math.floor(diff / 60);
@@ -143,6 +141,18 @@ p {
         `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s`;
     }
     setInterval(updateTimer, 1000);
+
+    // Slideshow de fotos automático
+    const fotos = ["foto.jpg", "foto1.jpg", "foto2.jpg", "foto3.jpg"]; // coloque os nomes/caminhos das suas fotos aqui
+    let index = 0;
+    const imgElement = document.getElementById("foto");
+
+    function trocarFoto() {
+      index = (index + 1) % fotos.length;
+      imgElement.src = fotos[index];
+    }
+
+    setInterval(trocarFoto, 5000); // troca a foto a cada 5 segundos
   </script>
 </body>
 </html>

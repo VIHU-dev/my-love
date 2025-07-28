@@ -42,14 +42,48 @@
     .carta-inner::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius:10px; }
     .carta-inner::-webkit-scrollbar-thumb { background:#ff79c6; border-radius:10px; }
     @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
+
+    /* NOVO ESTILO DA CARTA INICIAL */
+    #tela-inicial {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      perspective: 1200px;
+    }
+    #carta-inicial {
+      width: 300px;
+      height: 200px;
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ff69b4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 1s ease;
+      user-select: none;
+    }
+    #carta-inicial.abrindo {
+      animation: abrirCarta 1s forwards;
+    }
+    @keyframes abrirCarta {
+      0%   { transform: rotateX(0deg); }
+      100% { transform: rotateX(-90deg); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <!-- Tela inicial com botão -->
-  <div id="tela-inicial" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: black; display: flex; justify-content: center; align-items: center; z-index: 9999;">
-    <button onclick="mostrarSite()" style="font-size: 24px; padding: 20px 40px; border: none; border-radius: 12px; background-color: #ff69b4; color: white; cursor: pointer;">
-      Clique para abrir
-    </button>
+  <!-- Tela inicial como carta -->
+  <div id="tela-inicial">
+    <div id="carta-inicial">Clique para abrir</div>
   </div>
 
   <!-- Conteúdo original escondido -->
@@ -151,10 +185,18 @@
   </div>
 
   <script>
-    function mostrarSite() {
-      document.getElementById('tela-inicial').style.display = 'none';
-      document.getElementById('conteudo-site').style.display = 'block';
-    }
+    const carta = document.getElementById('carta-inicial');
+    const telaInicial = document.getElementById('tela-inicial');
+    const conteudoSite = document.getElementById('conteudo-site');
+
+    carta.addEventListener('click', () => {
+      carta.classList.add('abrindo');
+
+      carta.addEventListener('animationend', () => {
+        telaInicial.style.display = 'none';
+        conteudoSite.style.display = 'block';
+      }, { once: true });
+    });
   </script>
 </body>
 </html>

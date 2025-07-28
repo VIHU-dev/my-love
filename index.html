@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
   <style>
-    /* Seu CSS original */
     body {
       margin: 0;
       font-family: 'Pacifico', cursive;
@@ -43,13 +42,12 @@
     .carta-inner::-webkit-scrollbar-thumb { background:#ff79c6; border-radius:10px; }
     @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
 
-    /* --- NOVO ESTILO: Envelope rosa cobrindo a tela toda --- */
     #envelope {
       position: fixed;
       top: 0; left: 0;
       width: 100vw;
       height: 100vh;
-      background: #ff69b4; /* rosa forte e sólido */
+      background: #ff69b4;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -87,122 +85,22 @@
   </style>
 </head>
 <body>
-  <!-- Envelope rosa que cobre a tela inteira -->
   <div id="envelope">
     <div class="half left"></div>
     <div class="half right"></div>
   </div>
-
-  <!-- Conteúdo original escondido -->
   <div id="conteudo-site" style="display: none;">
-    <div id="particles-js"></div>
-    <div class="container">
-      <h1>Construindo uma vida com você há:</h1>
-      <p id="timer"></p>
-      <div class="foto-container">
-        <img src="foto.jpg" alt="Foto do casal" class="active" />
-        <img src="foto1.jpg" alt="Foto do casal" />
-        <img src="foto2.jpg" alt="Foto do casal" />
-        <img src="foto3.jpg" alt="Foto do casal" />
-      </div>
-      <p>Te amo minha gata❤️</p>
-      <div class="carta" id="carta">
-        <div class="carta-inner">
-          Depois de ter sofrido por alguém que não me amava, fiquei sem saber se amaria alguém de novo.<br><br>
-          Mas foi aí que você apareceu.<br><br>
-          Nunca imaginei que estaria conhecendo uma pessoa tão boa de estar por perto: linda, inteligente e cheia de qualidades.<br><br>
-          Não sei o que você viu em mim. Como eu disse, “nunca eu imaginaria”, mas aconteceu — me apaixonei.<br><br>
-          E que bom que foi assim.<br><br>
-          Eu tinha pensamentos tão negativos sobre mim, e você me livra deles. Sua simples presença ao meu lado já é suficiente para que eu possa dormir e não ter pesadelos.<br><br>
-          Tivemos nossos momentos difíceis, conversas emocionantes, mas nada que pudesse acabar com o nosso relacionamento.<br><br>
-          E espero que seja sempre assim.<br><br>
-          Quero continuar sempre ao seu lado, até nos dias mais difíceis.<br><br>
-          Eu te amo e quero registrar ainda mais momentos com você — até porque temos mais registros separados do que juntos.
-        </div>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <script>
-      particlesJS("particles-js", {
-        particles: {
-          number:{ value:50 }, size:{ value:3 }, color:{ value:"#ffffff" },
-          line_linked:{ enable:true, distance:150, color:"#ffffff", opacity:0.2, width:1 },
-          move:{ enable:true, speed:1 }
-        },
-        interactivity:{ events:{ onhover:{ enable:true, mode:"repulse" } } }
-      });
-
-      function createHearts() {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.style.left = Math.random()*100 + "vw";
-        heart.style.animationDuration = Math.random()*3+2 + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-      }
-      setInterval(createHearts,300);
-
-      // -> Correção do fuso-horário para GMT‑3
-      const startDate = new Date(Date.UTC(2025, 4, 27, 3, 0, 0)); // 27 de Maio às 00:00 GMT‑3
-      function updateTimer() {
-        const now = new Date();
-        let diff = Math.floor((now.getTime() - startDate.getTime()) / 1000);
-
-        const years   = Math.floor(diff / (365 * 24 * 3600));
-        diff %= 365 * 24 * 3600;
-        const months  = Math.floor(diff / (30 * 24 * 3600));
-        diff %= 30 * 24 * 3600;
-        const days    = Math.floor(diff / (24 * 3600));
-        diff %= 24 * 3600;
-        const hours   = Math.floor(diff / 3600);
-        diff %= 3600;
-        const minutes = Math.floor(diff / 60);
-        const seconds = diff % 60;
-
-        document.getElementById("timer").textContent =
-          `${years} anos, ${months} meses, ${days} dias, ${hours}h ${minutes}min ${seconds}s`;
-      }
-      setInterval(updateTimer,1000);
-
-      const fotos = document.querySelectorAll(".foto-container img");
-      let index = 0;
-      function trocarFoto() {
-        const fotoAtual = fotos[index];
-        index = (index + 1) % fotos.length;
-        const proximaFoto = fotos[index];
-        fotoAtual.classList.add("slide-out");
-        fotoAtual.classList.remove("active");
-        proximaFoto.classList.add("slide-in");
-        proximaFoto.classList.add("active");
-        fotoAtual.addEventListener('animationend', () => {
-          fotoAtual.classList.remove("slide-out");
-          fotoAtual.style.transform = "";
-        }, { once: true });
-        proximaFoto.addEventListener('animationend', () => {
-          proximaFoto.classList.remove("slide-in");
-          proximaFoto.style.transform = "";
-        }, { once: true });
-      }
-      setInterval(trocarFoto,5000);
-
-      document.getElementById("carta").addEventListener("click", () => {
-        document.getElementById("carta").classList.toggle("aberta");
-      });
-    </script>
+    <!-- Seu conteudo original -->
   </div>
-
   <script>
-    // Script para abrir o envelope rosa
     const envelope = document.getElementById('envelope');
     const conteudoSite = document.getElementById('conteudo-site');
-
     envelope.addEventListener('click', () => {
       envelope.classList.add('open');
-
       setTimeout(() => {
         envelope.style.display = 'none';
         conteudoSite.style.display = 'block';
-      }, 1200); // espera o tempo da animação
+      }, 1200);
     });
   </script>
 </body>

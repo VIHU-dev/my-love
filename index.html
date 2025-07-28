@@ -44,7 +44,7 @@
     @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
 
     /* --- NOVO ESTILO: Envelope rosa cobrindo a tela toda --- */
-  .envelope {
+  #envelope {
       position: relative;
       width: 300px;
       height: 200px;
@@ -54,7 +54,7 @@
       cursor: pointer;
     }
 
-    .envelope .body {
+    #envelope .body {
       width: 100%;
       height: 100%;
       background: #ff69b4;
@@ -63,7 +63,7 @@
       z-index: 1;
     }
 
-    .envelope .flap {
+    envelope .flap {
       position: absolute;
       top: 0;
       left: 0;
@@ -77,11 +77,11 @@
       z-index: 2;
     }
 
-    .envelope.open .flap {
+    envelope.open .flap {
       transform: rotateX(-180deg);
     }
 
-    .letter {
+    letter {
       position: absolute;
       top: 40px;
       left: 10%;

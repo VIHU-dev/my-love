@@ -7,97 +7,93 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to right, #1c1c1c, #3a3a3a);
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
-    text-align: center;
-  }
+ <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      overflow-x: hidden;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    #timer {
+      font-size: 1.5rem;
+      margin: 20px;
+    }
 
-  h1 {
-    font-size: 2em;
-    margin-top: 20px;
-  }
+    .foto-container {
+      position: relative;
+      width: 300px;
+      height: 370px;
+      margin: 30px auto;
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+    }
+    .foto-container img {
+      position: absolute;
+      width: 300px;
+      height: 370px;
+      border: 4px solid white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.7);
+      opacity: 0;
+      transform: translateX(100%) scale(0.9);
+      transition: transform 1s ease, opacity 1s ease;
+    }
+    .foto-container img.active {
+      opacity: 1;
+      z-index: 2;
+      transform: translateX(0) scale(1);
+    }
+    .foto-container img.out {
+      z-index: 1;
+      transform: translateX(-100%) scale(0.9);
+      opacity: 0;
+    }
 
-  #contador {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
+    .carta {
+      background-color: white;
+      color: black;
+      width: 90%;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .carta-conteudo {
+      display: none;
+      padding: 20px;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .carta.ativa .carta-conteudo {
+      display: block;
+    }
+    .carta h2 {
+      background-color: #f99;
+      margin: 0;
+      padding: 10px;
+      font-size: 1.2rem;
+    }
 
-  .foto-container {
-    position: relative;
-    width: 300px;
-    height: 370px;
-    margin: 20px auto;
-    perspective: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: visible;
-  }
-
-  .foto-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 370px;
-    border: 4px solid white;
-    box-shadow: 0 0 15px rgba(255,255,255,0.7);
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.5s ease;
-    backface-visibility: hidden;
-  }
-
-  .foto-container img.ativa {
-    opacity: 1;
-    z-index: 2;
-  }
-
-  button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    font-size: 1em;
-    border: none;
-    background-color: #ff4f4f;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    transition: background-color 0.3s ease;
-  }
-
-  button:hover {
-    background-color: #e04444;
-  }
-
-  /* Estilos da carta */
-  .carta {
-    margin-top: 40px;
-  }
-
-  .botao-carta {
-    background-color: #ffc107;
-    color: black;
-  }
-
-  .mensagem-carta {
-    display: none;
-    background-color: white;
-    color: black;
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    font-size: 1em;
-    white-space: pre-wrap;
-  }
-</style>
+    @media screen and (max-width: 600px) {
+      .foto-container {
+        width: 90%;
+        height: auto;
+      }
+      .foto-container img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="particles-js"></div>

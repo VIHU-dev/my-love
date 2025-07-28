@@ -44,57 +44,52 @@
     @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
 
     /* --- NOVO ESTILO: Envelope rosa cobrindo a tela toda --- */
-  #envelope {
-      position: relative;
-      width: 300px;
-      height: 200px;
-      background: #ff69b4;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      perspective: 1000px;
-      cursor: pointer;
-    }
+ #envelope {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* preto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 3;
+  perspective: 1500px;
+  overflow: hidden;
+}
 
-    #envelope .body {
-      width: 100%;
-      height: 100%;
-      background: #ff69b4;
-      position: absolute;
-      bottom: 0;
-      z-index: 1;
-    }
+#envelope .half {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: #ff69b4; /* rosa */
+  box-shadow: inset 0 0 60px #d14787;
+  backface-visibility: hidden;
+  transition: transform 1.2s ease;
+}
 
-    envelope .flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: #ff69b4;
-      transform-origin: top center;
-      transform: rotateX(0deg);
-      transition: transform 1s ease;
-      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-      z-index: 2;
-    }
+#envelope .half.top {
+  top: 0;
+  border-bottom: 1px solid #d14787;
+  transform-origin: top center;
+}
 
-    envelope.open .flap {
-      transform: rotateX(-180deg);
-    }
+#envelope .half.bottom {
+  top: 50%;
+  border-top: 1px solid #d14787;
+  transform-origin: bottom center;
+}
 
-    letter {
-      position: absolute;
-      top: 40px;
-      left: 10%;
-      width: 80%;
-      height: 120px;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      z-index: 0;
-      padding: 10px;
-      font-family: sans-serif;
-      font-size: 14px;
-      line-height: 1.4;
-    }
+/* Abertura do envelope */
+#envelope.open .half.top {
+  transform: rotateX(-90deg);
+}
+
+#envelope.open .half.bottom {
+  transform: rotateX(90deg);
+}
   </style>
 </head>
 <body>

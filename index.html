@@ -43,83 +43,54 @@
     .carta-inner::-webkit-scrollbar-thumb { background:#ff79c6; border-radius:10px; }
     @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
 
-    /* Novo estilo da carta inicial com dobra dupla */
-    #tela-inicial {
+    /* --- NOVO ESTILO: Envelope rosa cobrindo a tela toda --- */
+    #envelope {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100vh;
-      background: black;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ff69b4; /* rosa forte e sólido */
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
       z-index: 9999;
       perspective: 1500px;
+      overflow: hidden;
     }
-    #carta-inicial {
-      width: 320px;
-      height: 200px;
-      background: linear-gradient(135deg, #ff69b4, #ff1493);
-      border-radius: 15px;
-      box-shadow: 0 0 20px #ff69b4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.8rem;
-      cursor: pointer;
-      transform-style: preserve-3d;
-      position: relative;
-      user-select: none;
-      overflow: visible;
-    }
-    /* "Faces" da carta para criar o efeito de dobrar */
-    #carta-inicial .face {
+    #envelope .half {
       position: absolute;
-      width: 320px;
-      height: 100px;
-      left: 0;
-      background: linear-gradient(135deg, #ff69b4, #ff1493);
-      border-radius: 15px 15px 0 0;
-      box-shadow: 0 0 20px #ff69b4;
-      transform-origin: bottom center;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: #ff69b4;
+      box-shadow: inset 0 0 60px #d14787;
       backface-visibility: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      transition: transform 1.2s ease;
     }
-    #carta-inicial .face.bottom {
-      top: 100px;
-      border-radius: 0 0 15px 15px;
-      transform-origin: top center;
+    #envelope .half.left {
+      left: 0;
+      border-right: 1px solid #d14787;
+      transform-origin: left center;
     }
-
-    /* Animação para abrir a carta em duas etapas */
-    #carta-inicial.abrindo .face.top {
-      animation: abrirDobraTop 0.7s forwards ease-in;
-      animation-delay: 0s;
+    #envelope .half.right {
+      left: 50%;
+      border-left: 1px solid #d14787;
+      transform-origin: right center;
     }
-    #carta-inicial.abrindo .face.bottom {
-      animation: abrirDobraBottom 0.7s forwards ease-out;
-      animation-delay: 0.7s;
+    #envelope.open .half.left {
+      transform: rotateY(-90deg);
     }
-
-    @keyframes abrirDobraTop {
-      0% { transform: rotateX(0deg); }
-      100% { transform: rotateX(-90deg); opacity: 0.7; }
-    }
-    @keyframes abrirDobraBottom {
-      0% { transform: rotateX(0deg); }
-      100% { transform: rotateX(90deg); opacity: 0.7; }
+    #envelope.open .half.right {
+      transform: rotateY(90deg);
     }
   </style>
 </head>
 <body>
-  <!-- Tela inicial com carta dividida em duas faces para efeito de dobra -->
-  <div id="tela-inicial">
-    <div id="carta-inicial">
-      <div class="face top">Clique para abrir</div>
-      <div class="face bottom"></div>
-    </div>
+  <!-- Envelope rosa que cobre a tela inteira -->
+  <div id="envelope">
+    <div class="half left"></div>
+    <div class="half right"></div>
   </div>
 
   <!-- Conteúdo original escondido -->
@@ -221,18 +192,17 @@
   </div>
 
   <script>
-    const carta = document.getElementById('carta-inicial');
-    const telaInicial = document.getElementById('tela-inicial');
+    // Script para abrir o envelope rosa
+    const envelope = document.getElementById('envelope');
     const conteudoSite = document.getElementById('conteudo-site');
 
-    carta.addEventListener('click', () => {
-      carta.classList.add('abrindo');
-      carta.style.pointerEvents = 'none'; // evita múltiplos cliques
+    envelope.addEventListener('click', () => {
+      envelope.classList.add('open');
 
-      carta.addEventListener('animationend', () => {
-        telaInicial.style.display = 'none';
+      setTimeout(() => {
+        envelope.style.display = 'none';
         conteudoSite.style.display = 'block';
-      }, { once: true });
+      }, 1200); // espera o tempo da animação
     });
   </script>
 </body>

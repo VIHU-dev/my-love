@@ -60,35 +60,26 @@
   overflow: hidden;
 }
 
-#envelope .half {
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  background: #ff69b4; /* rosa */
-  box-shadow: inset 0 0 60px #d14787;
-  backface-visibility: hidden;
-  transition: transform 1.2s ease;
-}
-
-#envelope .half.top {
-  top: 0;
-  border-bottom: 1px solid #d14787;
+#envelope .flap {
+  width: 0;
+  height: 0;
+  border-left: 200px solid transparent;
+  border-right: 200px solid transparent;
+  border-bottom: 200px solid #ff69b4;
   transform-origin: top center;
+  transition: transform 1.2s ease;
+  z-index: 2;
+}
+#envelope .base {
+  width: 400px;
+  height: 200px;
+  background: #ff69b4;
+  box-shadow: inset 0 0 60px #d14787;
+  z-index: 1;
 }
 
-#envelope .half.bottom {
-  top: 50%;
-  border-top: 1px solid #d14787;
-  transform-origin: bottom center;
-}
-
-/* Abertura do envelope */
-#envelope.open .half.top {
-  transform: rotateX(-90deg);
-}
-
-#envelope.open .half.bottom {
-  transform: rotateX(90deg);
+#envelope.open .flap {
+  transform: rotateX(-180deg);
 }
   </style>
 </head>

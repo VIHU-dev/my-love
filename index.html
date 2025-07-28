@@ -68,20 +68,20 @@
       backface-visibility: hidden;
       transition: transform 1.2s ease;
     }
-    #envelope .half.left {
+    #envelope .half.up {
       left: 0;
       border-right: 1px solid #d14787;
-      transform-origin: left center;
+      transform-origin: up center;
     }
-    #envelope .half.right {
+    #envelope .half.down {
       left: 50%;
       border-left: 1px solid #d14787;
-      transform-origin: right center;
+      transform-origin: down center;
     }
-    #envelope.open .half.left {
+    #envelope.open .half.up {
       transform: rotateY(-90deg);
     }
-    #envelope.open .half.right {
+    #envelope.open .half.down {
       transform: rotateY(90deg);
     }
   </style>

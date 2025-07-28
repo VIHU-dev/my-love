@@ -7,42 +7,97 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-  <style>
-    /* ========== Seu CSS original acima ========== */
-    body {
-      margin: 0;
-      font-family: 'Pacifico', cursive;
-      color: white;
-      overflow-x: hidden;
-      background:
-        linear-gradient(120deg, rgba(20, 0, 30, 0.8), rgba(40, 0, 50, 0.8), rgba(60, 0, 60, 0.8)),
-        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
-      background-size: cover;
-    }
-    .container { position: relative; z-index: 2; text-align: center; top: 25%; max-width: 700px; margin: 30px auto 0; padding: 0 20px; }
-    h1 { font-size: 4rem; text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; margin-bottom: 10px; }
-    p { font-size: 2rem; text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; }
-    .foto-container { position: relative; width: 200px; height: 250px; margin: 20px auto; perspective: 1000px; display: flex; justify-content: center; align-items: center; overflow: visible; }
-    .foto-container img { position: absolute; top: 0; left: 0; width: 200px; height: 250px; border: 4px solid white; box-shadow: 0 0 15px rgba(255,255,255,0.7); opacity: 0; z-index: 1; transition: opacity 0.5s ease; backface-visibility: hidden; }
-    .foto-container img.active { opacity: 1; position: relative; z-index: 3; }
-    .foto-container img.slide-out { animation: slideOut 0.8s forwards; z-index: 2; }
-    .foto-container img.slide-in { animation: slideIn 0.8s forwards; z-index: 3; }
-    @keyframes slideOut { 0% { transform: translateX(0) rotateY(0deg); opacity:1; } 100% { transform: translateX(300px) rotateY(90deg); opacity:0; } }
-    @keyframes slideIn { 0% { transform: translateX(-300px) rotateY(-90deg); opacity:0;} 100% { transform: translateX(0) rotateY(0deg); opacity:1;} }
-    .heart { position: fixed; width:20px; height:20px; background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Ei-heart.svg/1024px-Ei-heart.svg.png') no-repeat center; background-size: contain; top:-20px; animation: fall linear infinite; }
-    @keyframes fall { 0% { transform: translateY(0) rotate(0deg); opacity:1;} 100% { transform: translateY(100vh) rotate(360deg); opacity:0;} }
-    #particles-js { position: fixed; width:100%; height:100%; top:0; left:0; z-index:1; }
-    .carta { max-width:600px; margin:40px auto 0; background: rgba(255,255,255,0.12); border-radius:15px; box-shadow:0 0 30px rgba(255,105,180,0.6); cursor:pointer; perspective:1000px; position: relative; user-select:none; height:200px; overflow:hidden; transition:height 0.8s ease; }
-    .carta-inner { width:100%; height:100%; background: rgba(40,0,50,0.9); border-radius:15px; padding:25px 30px; box-sizing:border-box; font-size:1.4rem; line-height:1.6; color:#ffe6f0; text-shadow:0 0 8px #ff79c6; overflow-y:auto; transform-style: preserve-3d; transform-origin: top center; transition: transform 0.8s ease; transform: rotateX(90deg); opacity:0; position:absolute; top:0; left:0; }
-    .carta.aberta { height:400px; cursor: default; }
-    .carta.aberta .carta-inner { transform: rotateX(0deg); opacity:1; position: relative; overflow-y:auto; }
-    .carta::before { content: "Clique para abrir a carta"; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); font-size:1.2rem; color:#ff79c6; text-shadow:0 0 5px #ff79c6; pointer-events:none; transition:opacity 0.3s ease; }
-    .carta.aberta::before { opacity:0; }
-    .carta-inner::-webkit-scrollbar { width:8px; }
-    .carta-inner::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius:10px; }
-    .carta-inner::-webkit-scrollbar-thumb { background:#ff79c6; border-radius:10px; }
-    @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
-  </style>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #1c1c1c, #3a3a3a);
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-top: 20px;
+  }
+
+  #contador {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  .foto-container {
+    position: relative;
+    width: 300px;
+    height: 370px;
+    margin: 20px auto;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+  }
+
+  .foto-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 370px;
+    border: 4px solid white;
+    box-shadow: 0 0 15px rgba(255,255,255,0.7);
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+    backface-visibility: hidden;
+  }
+
+  .foto-container img.ativa {
+    opacity: 1;
+    z-index: 2;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 1em;
+    border: none;
+    background-color: #ff4f4f;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #e04444;
+  }
+
+  /* Estilos da carta */
+  .carta {
+    margin-top: 40px;
+  }
+
+  .botao-carta {
+    background-color: #ffc107;
+    color: black;
+  }
+
+  .mensagem-carta {
+    display: none;
+    background-color: white;
+    color: black;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    font-size: 1em;
+    white-space: pre-wrap;
+  }
+</style>
 </head>
 <body>
   <div id="particles-js"></div>

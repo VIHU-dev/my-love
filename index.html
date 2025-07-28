@@ -23,7 +23,7 @@
     h1 { font-size: 4rem; text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; margin-bottom: 10px; }
     p { font-size: 2rem; text-shadow: 0 0 10px #ff79c6, 0 0 20px #ff79c6; }
     .foto-container { position: relative; width: 400px; height: 450px; margin: 20px auto; perspective: 1000px; display: flex; justify-content: center; align-items: center; overflow: visible; }
-    .foto-container img { position: absolute; top: 0; left: 0; width: 400px; height: 450px; border: 4px ridge white; box-shadow: 0 0 10px #8B008B, 0 0 20px #8B008B, 0 0 30px #DA70D6; opacity: 0; z-index: 1; transition: opacity 0.5s ease; backface-visibility: hidden; }
+    .foto-container img { position: absolute; top: 0; left: 0; width: 400px; height: 450px; border: 2px solid #8B008B; box-shadow: 0 0 10px #8B008B, 0 0 20px #8B008B, 0 0 30px #DA70D6; opacity: 0; z-index: 1; transition: opacity 0.5s ease; backface-visibility: hidden; }
     .foto-container img.active { opacity: 1; position: relative; z-index: 3; }
     .foto-container img.slide-out { animation: slideOut 0.8s forwards; z-index: 2; }
     .foto-container img.slide-in { animation: slideIn 0.8s forwards; z-index: 3; }

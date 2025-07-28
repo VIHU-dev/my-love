@@ -48,52 +48,56 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000;
+  width: 100%;
+  height: 100%;
+  background: #000000; /* preto */
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
   cursor: pointer;
   z-index: 3;
   perspective: 1500px;
   overflow: hidden;
 }
 
-/* Aba triangular (flap) */
-#envelope .flap {
-  width: 0;
-  height: 0;
-  border-left: 50vw solid transparent;
-  border-right: 50vw solid transparent;
-  border-bottom: 40vh solid #ffb6c1; /* Rosa claro */
-  transform-origin: top center;
+#envelope .half {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: #ff69b4; /* rosa */
+  box-shadow: inset 0 0 60px #d14787;
+  backface-visibility: hidden;
   transition: transform 1.2s ease;
-  z-index: 2;
 }
 
-/* Parte inferior (base do envelope) */
-#envelope .base {
-  width: 100vw;
-  height: 60vh;
-  background: linear-gradient(to bottom, #f472b6, #ec4899); /* Degradê rosa */
-  box-shadow: inset 0 0 60px rgba(209, 71, 135, 0.4);
-  z-index: 1;
+#envelope .half.top {
+  top: 0;
+  border-bottom: 1px solid #d14787;
+  transform-origin: top center;
+}
+
+#envelope .half.bottom {
+  top: 50%;
+  border-top: 1px solid #d14787;
+  transform-origin: bottom center;
 }
 
 /* Abertura do envelope */
-#envelope.open .flap {
-  transform: rotateX(-180deg);
+#envelope.open .half.top {
+  transform: rotateX(-90deg);
+}
+
+#envelope.open .half.bottom {
+  transform: rotateX(90deg);
 }
 
   </style>
 </head>
 <body>
   <!-- Envelope rosa que cobre a tela inteira -->
- <div id="envelope">
-  <div class="flap"></div>
-  <div class="base"></div>
+<div id="envelope" onclick="this.classList.toggle('open')">
+  <div class="half top"></div>
+  <div class="half bottom"></div>
 </div>
 
   <!-- Conteúdo original escondido -->

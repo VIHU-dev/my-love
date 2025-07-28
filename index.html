@@ -208,13 +208,17 @@
     const conteudoSite = document.getElementById('conteudo-site');
 
     envelope.addEventListener('click', () => {
-      envelope.classList.add('open');
+  envelope.classList.add('open');
 
-      setTimeout(() => {
-        envelope.style.display = 'none';
-        conteudoSite.style.display = 'block';
-      }, 1200); // espera o tempo da animação
-    });
+  setTimeout(() => {
+    envelope.style.display = 'none';
+    conteudoSite.style.display = 'block';
+
+    // 👉 Abrir a carta automaticamente
+    document.getElementById("carta").classList.add("aberta");
+
+  }, 1200); // espera o tempo da animação do envelope
+});
   </script>
 </body>
 </html>

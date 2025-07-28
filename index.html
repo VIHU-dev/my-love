@@ -44,13 +44,13 @@
     @media (max-width:600px) { h1{font-size:2.5rem;} p{font-size:1.3rem;} .foto-container{width:140px;height:175px;} .foto-container img{width:140px;height:175px;} .carta{max-width:90vw;height:150px;} .carta.aberta{height:300px;} .carta-inner{font-size:1rem;padding:15px 20px;} }
 
     /* --- NOVO ESTILO: Envelope rosa cobrindo a tela toda --- */
- #envelope {
+#envelope {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000000; /* preto */
+  background: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,26 +58,29 @@
   z-index: 3;
   perspective: 1500px;
   overflow: hidden;
+  flex-direction: column; /* para alinhar flap + base verticalmente */
 }
 
 #envelope .flap {
   width: 0;
   height: 0;
-  border-left: 200px solid transparent;
-  border-right: 200px solid transparent;
-  border-bottom: 200px solid #ff69b4;
-  transform-origin: top center;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  border-bottom: 30vh solid #ff69b4; /* triangulo maior */
+  transform-origin: bottom center; /* abre de baixo para cima */
   transition: transform 1.2s ease;
   z-index: 2;
 }
+
 #envelope .base {
-  width: 400px;
-  height: 200px;
+  width: 100vw;
+  height: 70vh;
   background: #ff69b4;
   box-shadow: inset 0 0 60px #d14787;
   z-index: 1;
 }
 
+/* animação de abertura */
 #envelope.open .flap {
   transform: rotateX(-180deg);
 }

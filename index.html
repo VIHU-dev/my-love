@@ -68,20 +68,22 @@
       backface-visibility: hidden;
       transition: transform 1.2s ease;
     }
-    #envelope .half.up {
-      up: 0;
-      border-right: 1px solid #d14787;
-      transform-origin: up center;
+    #envelope .half.top {
+    top: 0;
+    border-right: 1px solid #d14787;
+    transform-origin: top center;
+}
+
     }
-    #envelope .half.down {
-      up: 50%;
+    #envelope .half.bottom {
+      top: 50%;
       border-left: 1px solid #d14787;
-      transform-origin: down center;
+      transform-origin: bottom center;
     }
-    #envelope.open .half.up {
+    #envelope.open .half.top {
       transform: rotateY(-90deg);
     }
-    #envelope.open .half.down {
+    #envelope.open .half.bottom {
       transform: rotateY(90deg);
     }
   </style>
@@ -89,8 +91,8 @@
 <body>
   <!-- Envelope rosa que cobre a tela inteira -->
   <div id="envelope">
-    <div class="half up"></div>
-    <div class="half down"></div>
+    <div class="half top"></div>
+    <div class="half bottom"></div>
   </div>
 
   <!-- Conteúdo original escondido -->

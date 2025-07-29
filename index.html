@@ -115,12 +115,12 @@
 </head>
 <body>
   <!-- Envelope rosa que cobre a tela inteira -->
-  <div id="envelope">
-    <div class="half left"></div>
-    <div class="half right"></div>
-<button id="abrirBotao">Clique para abrir</button>
-<img id="laco" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Pink_bow_icon.svg" alt="Laço decorativo" />
-  </div>
+ <div id="envelope">
+  <div class="half left"></div>
+  <div class="half right"></div>
+  <img id="laco" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Pink_bow_icon.svg" alt="Laço" />
+  <button id="abrirEnvelope">Abrir</button>
+</div>
 
   <!-- Conteúdo original escondido -->
 <div id="conteudo-site" style="opacity: 0; pointer-events: none; transition: opacity 0.6s ease;">
@@ -227,11 +227,13 @@ const conteudoSite = document.getElementById('conteudo-site');
 const abrirBotao = document.getElementById('abrirBotao');
 const laco = document.getElementById('laco');
 
-abrirBotao.addEventListener('click', () => {
+document.getElementById('abrirEnvelope').addEventListener('click', () => {
   // Esconde o laço
   laco.style.opacity = '0';
 
   // Anima o envelope
+  document.getElementById('laco').style.display = 'none';
+document.getElementById('abrirEnvelope').style.display = 'none';
   envelope.classList.add('open');
 
   // Mostra o conteúdo depois da animação

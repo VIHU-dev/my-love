@@ -83,6 +83,25 @@
     #envelope.open .half.right {
       transform: rotateY(90deg);
     }
+#abrirBotao {
+  position: absolute;
+  bottom: 50px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background-color: white;
+  color: #ff69b4;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 20px #ff69b4;
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#abrirBotao:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px #ff1493;
+}
   </style>
 </head>
 <body>
@@ -90,6 +109,7 @@
   <div id="envelope">
     <div class="half left"></div>
     <div class="half right"></div>
+<button id="abrirBotao">Clique para abrir</button>
   </div>
 
   <!-- Conteúdo original escondido -->
@@ -192,18 +212,20 @@
 
   <script>
     // Script para abrir o envelope rosa
-    const envelope = document.getElementById('envelope');
-    const conteudoSite = document.getElementById('conteudo-site');
+   const envelope = document.getElementById('envelope');
+const conteudoSite = document.getElementById('conteudo-site');
+const abrirBotao = document.getElementById('abrirBotao');
 
-    envelope.addEventListener('click', () => {
-      envelope.classList.add('open');
+abrirBotao.addEventListener('click', () => {
+  envelope.classList.add('open');
 
-     setTimeout(() => {
-  envelope.style.display = 'none';
-  conteudoSite.style.opacity = '1';
-  conteudoSite.style.pointerEvents = 'auto';
-}, 600); // espera o tempo da animação
-    });
+  setTimeout(() => {
+    envelope.style.display = 'none';
+    conteudoSite.style.display = 'block';
+    conteudoSite.style.opacity = '1';
+    conteudoSite.style.pointerEvents = 'auto';
+  }, 600); // ou ajuste esse valor como quiser
+});
   </script>
 </body>
 </html>

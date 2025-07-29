@@ -238,29 +238,26 @@
   </div>
 
   <script>
-    // Script para abrir o envelope rosa
- const envelope = document.getElementById('envelope');
-const conteudoSite = document.getElementById('conteudo-site');
-const abrirBotao = document.getElementById('abrirBotao');
-const laco = document.getElementById('laco');
+  const envelope = document.getElementById('envelope');
+  const conteudoSite = document.getElementById('conteudo-site');
+  const botaoAbrir = document.getElementById('abrirEnvelope');
+  const laco = document.getElementById('laco');
 
-document.getElementById('abrirEnvelope').addEventListener('click', () => {
-  // Esconde o laço
-  laco.style.opacity = '0';
+  botaoAbrir.addEventListener('click', () => {
+    // Esconde o botão e o laço
+    laco.style.display = 'none';
+    botaoAbrir.style.display = 'none';
 
-  // Anima o envelope
-  document.getElementById('laco').style.display = 'none';
-document.getElementById('abrirEnvelope').style.display = 'none';
-  envelope.classList.add('open');
+    // Anima o envelope
+    envelope.classList.add('open');
 
-  // Mostra o conteúdo depois da animação
-  setTimeout(() => {
-    envelope.style.display = 'none';
-    conteudoSite.style.display = 'block';
-    conteudoSite.style.opacity = '1';
-    conteudoSite.style.pointerEvents = 'auto';
-  }, 600); // pode ajustar esse tempo se quiser
-});
+    // Mostra o site
+    setTimeout(() => {
+      envelope.style.display = 'none';
+      conteudoSite.style.display = 'block';
+    }, 600); // ou menos, se quiser mais rápido
+  });
+</script>
   </script>
 </body>
 </html>
